@@ -7,7 +7,7 @@ resource "aws_security_group" "attacker_sg" {
   name        = "${local.name_prefix}-attacker-sg"
   description = "Security group for attacker instance"
   vpc_id      = var.vpc_id
-  
+
   ingress {
     description = "Allow SSH from admin"
     from_port   = 22
@@ -35,7 +35,6 @@ resource "aws_security_group" "victim_normal" {
   description = "Victim normal SG"
   vpc_id      = var.vpc_id
 
-  
   ingress {
     description = "Allow SSH from admin"
     from_port   = 22
@@ -85,7 +84,6 @@ resource "aws_security_group" "victim_quarantine" {
   description = "Victim quarantine SG (isolation)"
   vpc_id      = var.vpc_id
 
-  
   egress {
     description = "Allow all outbound traffic"
     from_port   = 0
@@ -100,12 +98,9 @@ resource "aws_security_group" "victim_quarantine" {
 }
 
 
-
-
-
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"] 
+  owners      = ["099720109477"]
 
   filter {
     name   = "name"
@@ -117,9 +112,6 @@ data "aws_ami" "ubuntu" {
     values = ["hvm"]
   }
 }
-
-
-
 
 
 resource "aws_instance" "attacker" {
@@ -139,11 +131,7 @@ resource "aws_instance" "attacker" {
 resource "aws_instance" "victim" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
-
-  
-  
-  
-  subnet_id = var.public_subnet_id
+  subnet_id     = var.public_subnet_id
 
   vpc_security_group_ids = [aws_security_group.victim_normal.id]
   key_name               = var.ssh_key_name
