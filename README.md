@@ -1,5 +1,7 @@
 # AWS Network Traffic Analysis
 
+[![Terraform Check](https://github.com/hubertwojcik/aws-network-traffic-analysis/actions/workflows/terraform-check.yml/badge.svg)](https://github.com/hubertwojcik/aws-network-traffic-analysis/actions/workflows/terraform-check.yml)
+
 > IaaS cloud environment on AWS for network traffic analysis, anomaly detection, and automated security incident response.
 
 ## Overview
